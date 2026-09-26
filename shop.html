@@ -1,64 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Shop</title>
-        <link rel="stylesheet" href="header.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteBuild - Shop</title>
+    <link rel="stylesheet" href="header.css">
+    <style>
+        body {
+            background-color: #ecf8fa;
+            color: #333;
+        }
 
-        <style>
-            body {
-                margin: 0;
-            }
-            header {
-                margin: 0;
-                padding: 15px 25px;
-            }
-            header > div {
-                gap: 12px;
-            }
-            .topbar-items {
-                margin-left: auto;
-                margin-right: 10px;
-                list-style: none;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                gap: 30px;
-            }
-            .topbar-items li a {
-                text-decoration: none;
-                font-size: 1.1rem;
-                color: #333;
-                font-weight: 600;
-                padding: 8px 14px;
-                border-radius: 6px;
-                transition: background-color 0.2s;
-            }
-            .topbar-items li a:hover {
-                background-color: rgba(0, 0, 0, 0.08);
-            }
-        </style>
-    </head>
+        /* ===== HEADER EXTRAS ===== */
+        header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 14px;
+        }
 
+        .cart-btn {
+            background: none;
+            border: 1px solid #333;
+            color: #333;
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
 
-    <body>
-        <header>
-            <div> 
-                <a href="homepage.html">
-                    <img id="logo" src="logo.png" alt="Logo" >
-                </a>    
-                <div class="header-text">  
-                    <h1>LiteBuild</h1>
-                    <h3 id="subtitle">by LiteHost</h3>
-                </div>
-                <ul class="topbar-items">
-                    <li><a href="cart.html"> Cart</a></li>
-                    <li><a href="e.html"> Materials</a></li>
-                    <li><a href="w.html"> About</a></li>
-                </ul>
+        .cart-btn:hover {
+            background-color: rgba(0,0,0,0.08);
+        }
+
+        .cart-count {
+            background-color: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            margin: 40px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        main h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        main > p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        /* ===== CATEGORY FILTER ===== */
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border: 2px solid #1a73e8;
+            border-radius: 20px;
+            background: #fff;
+            color: #1a73e8;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: #1a73e8;
+            color: #fff;
+        }
+
+        /* ===== PRODUCT GRID ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+            text-align: left;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: #f3f4f6;
+        }
+
+        .product-info {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #1a73e8;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 12px;
+            flex: 1;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a73e8;
+        }
+
+        .add-to-cart {
+            padding: 8px 16px;
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #155ab6;
+        }
+
+        .add-to-cart.added {
+            background-color: #34a853;
+        }
+
+        /* ===== CART SIDEBAR ===== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            max-width: 90vw;
+            height: 100%;
+            background: #fff;
+            z-index: 300;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            background-color: rgb(204, 235, 255);
+        }
+
+        .cart-header h2 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #666;
+            padding: 4px 8px;
+        }
+
+        .cart-close:hover {
+            color: #333;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #999;
+            margin-top: 60px;
+            font-size: 1.1rem;
+        }
+
+        .cart-empty span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+
+        .cart-item-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: #1a73e8;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .cart-item-qty {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px;
+        }
+
+        .remove-btn:hover {
+            color: #cc0000;
+        }
+
+        /* ===== CART FOOTER ===== */
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #155ab6;
+        }
+
+        .checkout-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #333;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            z-index: 999;
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER (matches quote.html structure) -->
+    <header>
+        <div> 
+            <a href="homepage.html">
+                <img id="logo" src="logo.png" alt="Logo" >
+            </a>
+            <div class="header-text">  
+                <h1>LiteBuild</h1>
+                <h3 id="subtitle">by LiteHost</h3>
             </div>
-        </header>
-        
-    </body>
+        </div>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <h2>Building Materials Shop</h2>
+        <p>Quality hardware and building supplies for every project.</p>
+
+        <!-- Category Filters -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+            <button class="filter-btn" onclick="filterProducts('lumber', this)">Lumber</button>
+            <button class="filter-btn" onclick="filterProducts('cement', this)">Cement &amp; Concrete</button>
+            <button class="filter-btn" onclick="filterProducts('fasteners', this)">Fasteners</button>
+            <button class="filter-btn" onclick="filterProducts('plumbing', this)">Plumbing</button>
+            <button class="filter-btn" onclick="filterProducts('electrical', this)">Electrical</button>
+            <button class="filter-btn" onclick="filterProducts('paint', this)">Paint</button>
+            <button class="filter-btn" onclick="filterProducts('tools', this)">Tools</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <!-- Products are rendered by JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <small>&copy; C Corporation.</small>
+    </footer>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 Your Cart</h2>
+            <button class="cart-close" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <span>🛒</span>
+                Your cart is empty
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₱0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===== PRODUCT DATA =====
+        const products = [
+            // Lumber
+            { id: 1,  name: "2×4 Pine Stud (8ft)",       category: "lumber",     price: 100,   icon: "🪵", desc: "Kiln-dried whitewood stud, ideal for framing." },
+            { id: 2,  name: "Plywood Sheet 4×8 (¾\")",   category: "lumber",     price: 100,  icon: "🪵", desc: "Sanded plywood sheet for subfloors and sheathing." },
+            { id: 3,  name: "2×6 Pressure Treated (8ft)", category: "lumber",     price: 100,   icon: "🪵", desc: "Ground-contact rated lumber for outdoor projects." },
+
+            // Cement & Concrete
+            { id: 4,  name: "Portland Cement (50lb)",     category: "cement",     price: 100,  icon: "🧱", desc: "Type I/II general-purpose portland cement." },
+            { id: 5,  name: "Ready-Mix Concrete (60lb)",  category: "cement",     price: 100,   icon: "🧱", desc: "Just add water – sets in 24 hours." },
+            { id: 6,  name: "Mortar Mix (80lb)",          category: "cement",     price: 100,   icon: "🧱", desc: "Type S mortar for laying brick and block." },
+
+            // Fasteners
+            { id: 7,  name: "Wood Screws #8 (1lb box)",   category: "fasteners",  price: 100,   icon: "🔩", desc: "Phillips flat-head wood screws, 2-inch." },
+            { id: 8,  name: "Framing Nails 3½\" (5lb)",   category: "fasteners",  price: 100,  icon: "🔩", desc: "Bright common nails for framing work." },
+            { id: 9,  name: "Concrete Anchors (10pk)",    category: "fasteners",  price: 100,   icon: "🔩", desc: "Wedge anchors for securing to concrete." },
+
+            // Plumbing
+            { id: 10, name: "PVC Pipe 1\" (10ft)",        category: "plumbing",   price: 100,   icon: "🚿", desc: "Schedule 40 PVC pipe for water supply." },
+            { id: 11, name: "Copper Elbow ¾\" (10pk)",    category: "plumbing",   price: 100,  icon: "🚿", desc: "90-degree copper sweat elbows." },
+            { id: 12, name: "Ball Valve ½\" Brass",       category: "plumbing",   price: 100,  icon: "🚿", desc: "Full-port brass ball valve, lead-free." },
+
+            // Electrical
+            { id: 13, name: "Romex 14/2 Wire (50ft)",     category: "electrical", price: 100,  icon: "⚡", desc: "NM-B residential electrical cable." },
+            { id: 14, name: "Outlet Receptacle (10pk)",    category: "electrical", price: 100,   icon: "⚡", desc: "15A 125V duplex receptacles, white." },
+            { id: 15, name: "Circuit Breaker 20A",         category: "electrical", price: 100,   icon: "⚡", desc: "Single-pole plug-in circuit breaker." },
+
+            // Paint
+            { id: 16, name: "Interior Latex Paint (1gal)", category: "paint",     price: 100,  icon: "🎨", desc: "Eggshell finish, ultra white, low VOC." },
+            { id: 17, name: "Primer Sealer (1gal)",        category: "paint",     price: 100,  icon: "🎨", desc: "Multi-surface bonding primer." },
+            { id: 18, name: "Paint Roller Kit (9\")",      category: "paint",     price: 100,  icon: "🎨", desc: "Roller frame, cover, and tray set." },
+
+            // Tools
+            { id: 19, name: "Claw Hammer 16oz",            category: "tools",     price: 100,  icon: "🔨", desc: "Fiberglass handle, smooth face." },
+            { id: 20, name: "Tape Measure 25ft",           category: "tools",     price: 100,   icon: "📏", desc: "Auto-lock blade with magnetic tip." },
+            { id: 21, name: "Cordless Drill 20V",          category: "tools",     price: 100,  icon: "🔧", desc: "Lithium-ion drill/driver with battery." },
+            { id: 22, name: "Level 48\"",                  category: "tools",     price: 100,  icon: "📐", desc: "Aluminum box beam level, 3 vials." },
+            { id: 23, name: "Safety Glasses (3pk)",        category: "tools",     price: 100,   icon: "🥽", desc: "Impact-resistant polycarbonate lenses." },
+            { id: 24, name: "Utility Knife",               category: "tools",     price: 100,   icon: "🔪", desc: "Retractable blade with quick-change." },
+        ];
+
+        // ===== CART STATE =====
+        let cart = [];
+
+        // ===== RENDER PRODUCTS =====
+        function renderProducts(filter = "all") {
+            const grid = document.getElementById("productGrid");
+            const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-img">${product.icon}</div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-desc">${product.desc}</div>
+                        <div class="product-bottom">
+                            <span class="product-price">₱${product.price.toFixed(2)}</span>
+                            <button class="add-to-cart" id="addBtn-${product.id}" onclick="addToCart(${product.id})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        // ===== FILTER =====
+        function filterProducts(category, btn) {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProducts(category);
+        }
+
+        // ===== ADD TO CART =====
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            // Button feedback
+            const btn = document.getElementById(`addBtn-${productId}`);
+            if (btn) {
+                btn.textContent = "✓ Added";
+                btn.classList.add("added");
+                setTimeout(() => {
+                    btn.textContent = "Add to Cart";
+                    btn.classList.remove("added");
+                }, 1000);
+            }
+
+            showToast(`${product.name} added to cart`);
+            updateCart();
+        }
+
+        // ===== UPDATE CART UI =====
+        function updateCart() {
+            const cartItemsEl = document.getElementById("cartItems");
+            const cartCountEl = document.getElementById("cartCount");
+            const cartTotalEl = document.getElementById("cartTotal");
+            const checkoutBtn = document.getElementById("checkoutBtn");
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            cartCountEl.textContent = totalItems;
+            cartTotalEl.textContent = `₱${totalPrice.toFixed(2)}`;
+            checkoutBtn.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = `
+                    <div class="cart-empty">
+                        <span>🛒</span>
+                        Your cart is empty
+                    </div>`;
+                return;
+            }
+
+            cartItemsEl.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-icon">${item.icon}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₱${(item.price * item.qty).toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                        <span class="cart-item-qty">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        // ===== CHANGE QUANTITY =====
+        function changeQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            updateCart();
+        }
+
+        // ===== REMOVE FROM CART =====
+        function removeFromCart(productId) {
+            const item = cart.find(i => i.id === productId);
+            cart = cart.filter(i => i.id !== productId);
+            if (item) showToast(`${item.name} removed`);
+            updateCart();
+        }
+
+        // ===== TOGGLE CART SIDEBAR =====
+        function toggleCart() {
+            document.getElementById("cartSidebar").classList.toggle("open");
+            document.getElementById("cartOverlay").classList.toggle("open");
+        }
+
+        // ===== CHECKOUT =====
+        function checkout() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            alert(`Order placed!\n\n${totalItems} item(s) — Total: ₱${totalPrice.toFixed(2)}\n\nThank you for shopping at LiteBuild!`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        // ===== TOAST =====
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
+        }
+
+        // ===== INIT =====
+        renderProducts();
+    </script>
+
+</body>
 </html>
