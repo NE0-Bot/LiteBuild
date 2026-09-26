@@ -6,6 +6,39 @@
         <title>Shop</title>
         <link rel="stylesheet" href="header.css">
 
+        <style>
+            body {
+                margin: 0;
+            }
+            header {
+                margin: 0;
+                padding: 15px 25px;
+            }
+            header > div {
+                gap: 12px;
+            }
+            .topbar-items {
+                margin-left: auto;
+                margin-right: 10px;
+                list-style: none;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                gap: 30px;
+            }
+            .topbar-items li a {
+                text-decoration: none;
+                font-size: 1.1rem;
+                color: #333;
+                font-weight: 600;
+                padding: 8px 14px;
+                border-radius: 6px;
+                transition: background-color 0.2s;
+            }
+            .topbar-items li a:hover {
+                background-color: rgba(0, 0, 0, 0.08);
+            }
+        </style>
     </head>
 
 
@@ -14,11 +47,16 @@
             <div> 
                 <a href="homepage.html">
                     <img id="logo" src="logo.png" alt="Logo" >
-                </a>
+                </a>    
                 <div class="header-text">  
                     <h1>LiteBuild</h1>
                     <h3 id="subtitle">by LiteHost</h3>
                 </div>
+                <ul class="topbar-items">
+                    <li><a href="cart.html"> Cart</a></li>
+                    <li><a href="e.html"> Materials</a></li>
+                    <li><a href="w.html"> About</a></li>
+                </ul>
             </div>
         </header>
         

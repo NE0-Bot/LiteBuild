@@ -7,38 +7,44 @@
         <link rel="stylesheet" href="header.css">
 
         <style>
-            body {background-color:#ecf8fa;}
-            #horizontal {
-                /* vhbsdbkvjsbdkjvkjsn */
-                padding-left:100px; 
-                display:block;}
-            nav {border:2px solid Tomato;}
-            
-            p {margin-top:0;}
+            body {
+                background-color: #ecf8fa;
+                margin: 0;}
+            .start {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 80vh;
+                text-align: center;
+            }
+            .start img {
+                max-width: 200px;
+                margin-bottom: 20px;}
+            .start h1 {
+                margin: 0 0 5px;
+                font-size: 2.5rem;}
+            .btn {
+                display: inline-block;
+                padding: 14px 40px;
+                background-color: #1a73e8;
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.2rem;
+                font-weight: bold;
+                border-radius: 8px;
+                transition: background-color 0.2s;}
+            .btn:hover {
+                background-color: #155ab6;}
         </style>
+        
     </head>
 
     <body>
-        <header>
-            <div> 
-                <a href="homepage.html">
-                    <img id="logo" src="logo.png" alt="Logo" >
-                </a>
-                <div class="header-text">  
-                    <h1>LiteBuild</h1>
-                    <h3 id="subtitle">by LiteHost</h3>
-                </div>
-            </div>
-        </header>
-
-        <nav id="horizontal" ><h2><a href="shop.html">GET STARTED</a></h2>
-                <p><a href="quote.html">Favorite Song</a> | <a href="table.html">Table</a> | <a href="css.html" >Style Sheets</a></p>
-        </nav>
-
-        <nav id="vertical"><h2>page</h2>
-            <p>Further reading<br>Books:<br><br>
-            <a href="nav-js.html">Javascript</a><br><br>
-            <a href="nav-css.html">CSS</a></p>
-        </nav>
+        <div class="start">
+            <img src="logo.png" alt="LiteBuild Logo">
+            <h1>LiteBuild</h1>
+            <a href="index.html" class="btn">Get Started</a>
+        </div>
     </body>
 </html>
