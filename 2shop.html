@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - LiteBuild</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="3style.css">
+    <script>try{if(localStorage.getItem('litebuild-theme')==='dark')document.documentElement.classList.add('dark-theme')}catch(e){}</script>
+    <script src="4translationDictionary.js"></script>
+</head>
+<body>
+
+    <!-- HEADER (Matches 0homepage.html + Rectangle Border) -->
+    <header class="site-header" role="banner">
+        <div class="header-banner">
+            <img src="banner.png" alt="LiteBuild Banner" class="banner-img">
+        </div>
+        <div class="wrap topbar">
+            <a class="brand" href="0homepage.html">
+                <img src="5logo.png" alt="LiteBuild Logo">
+                <span>
+                    <strong>LiteBuild</strong>
+                    <small>by LiteHost</small>
+                </span>
+            </a>
+            <div class="page-controls">
+                <select class="language-select" aria-label="Language" data-i18n-aria="languageName">
+                    <option value="en">English</option>
+                    <option value="fil">Filipino</option>
+                </select>
+                <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <span class="theme-icon" aria-hidden="true">☾</span>
+                    <span class="theme-label">Dark</span>
+                </button>
+            </div>
+            <nav class="topbar-nav" aria-label="Main Navigation">
+                <ul>
+                    <li><a class="nav-link" href="0homepage.html">Home</a></li>
+                    <li><a class="nav-link active" href="2shop.html"><span data-i18n="exploreShop">Shop</span></a></li>
+                    <li><a class="nav-link" href="1index.html"><span data-i18n="signIn">Sign in</span> <span aria-hidden="true">↗</span></a></li>
+                    <li>
+                        <button class="cart-btn" onclick="toggleCart()">
+                            🚚 <span data-i18n="cart">Truck</span> <span class="cart-count" id="cartCount">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="shop-banner" aria-label="LiteBuild shop introduction">
+            <div class="shop-banner-copy">
+                <span class="eyebrow" data-i18n="shopEyebrow">The right materials for what’s next</span>
+                <h2 data-i18n="shopTitle">Building Materials Shop</h2>
+                <p data-i18n="shopIntro">Quality hardware and building supplies for every project.</p>
+            </div>
+            <a class="shop-logo-frame" href="0homepage.html" title="LiteBuild Home" aria-label="LiteBuild Home">
+                <img src="5logo.png" alt="LiteBuild Logo">
+            </a>
+        </section>
+
+        <!-- Category Filters -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all', this)" data-i18n="all">All</button>
+            <button class="filter-btn" onclick="filterProducts('plywood', this)" data-i18n="plywood">Plywood</button>
+            <button class="filter-btn" onclick="filterProducts('cement', this)" data-i18n="cement">Cement &amp; Concrete</button>
+            <button class="filter-btn" onclick="filterProducts('fasteners', this)" data-i18n="fasteners">Fasteners</button>
+            <button class="filter-btn" onclick="filterProducts('plumbing', this)" data-i18n="plumbing">Plumbing</button>
+            <button class="filter-btn" onclick="filterProducts('electrical', this)" data-i18n="electrical">Electrical</button>
+            <button class="filter-btn" onclick="filterProducts('paint', this)" data-i18n="paint">Paint</button>
+            <button class="filter-btn" onclick="filterProducts('tools', this)" data-i18n="tools">Tools</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <!-- Products are rendered by JavaScript -->
+        </div>
+
+        <!-- CONVERSION TABLE SECTION -->
+        <section class="conversion-section" id="conversionSection" aria-labelledby="conversionTitle">
+            <div class="conversion-box">
+                <div class="conversion-box-header">
+                    <span class="eyebrow">Measurement Guide</span>
+                    <h2 id="conversionTitle">Conversion Table</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="grid-table">
+                        <caption class="sr-only">Conversions for length and area</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 14%;">Dimension</th>
+                                <th scope="col" style="width: 22%;">Unit</th>
+                                <th scope="col" style="width: 20%;">Imperial Value</th>
+                                <th scope="col" style="width: 22%;">Metric Equivalent</th>
+                                <th scope="col" style="width: 22%;">Hardware / Store Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Length Rows -->
+                            <tr>
+                                <th scope="rowgroup" rowspan="5" class="grid-group-header">Length</th>
+                                <td><strong>1 Inch (1″)</strong></td>
+                                <td>1 in (<sup>1</sup>/<sub>12</sub> ft)</td>
+                                <td><strong>25.4 mm</strong> (2.54 cm)</td>
+                                <td>#8 Wood screws, 1″ PVC pipe diameters</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Foot (1′)</strong></td>
+                                <td>12 inches (1 ft)</td>
+                                <td><strong>304.8 mm</strong> (0.3048 m)</td>
+                                <td>Framing stud spacing (16″/24″ OC), levels</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Yard (1 yd)</strong></td>
+                                <td>36 inches (3 ft)</td>
+                                <td><strong>914.4 mm</strong> (0.9144 m)</td>
+                                <td>Wire and electrical cable runs (Romex 14/2)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Meter (1 m)</strong></td>
+                                <td>39.37 inches (3.2808 ft)</td>
+                                <td><strong>1,000 mm</strong> (100 cm)</td>
+                                <td>Tape measure (metric markings), site planning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2×4×8 Pine Stud</strong></td>
+                                <td>96 inches (8 ft)</td>
+                                <td><strong>2,438.4 mm</strong> (2.438 m)</td>
+                                <td>Standard wall framing lumber height</td>
+                            </tr>
+
+                            <!-- Area Rows -->
+                            <tr>
+                                <th scope="rowgroup" rowspan="5" class="grid-group-header">Area</th>
+                                <td><strong>1 Square Inch (sq in)</strong></td>
+                                <td>1 in²</td>
+                                <td><strong>6.452 cm²</strong> (645.2 mm²)</td>
+                                <td>Pipe cross-section, bolt load area</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Square Foot (sq ft)</strong></td>
+                                <td>144 in² (1 sq ft)</td>
+                                <td><strong>0.0929 m²</strong> (929 cm²)</td>
+                                <td>Flooring, subfloors, tile coverage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Square Meter (1 m²)</strong></td>
+                                <td>10.764 sq ft (1,550 in²)</td>
+                                <td><strong>10,000 cm²</strong> (1 m²)</td>
+                                <td>Drywall, masonry walls, room floor sizing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Plywood Sheet (4′×8′)</strong></td>
+                                <td>32.00 sq ft (4,608 in²)</td>
+                                <td><strong>2.973 m²</strong></td>
+                                <td>Standard 4×8 plywood sheet surface coverage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>100 Square Feet (sq ft)</strong></td>
+                                <td>100 sq ft (11.11 sq yd)</td>
+                                <td><strong>9.290 m²</strong> (~3.13 sheets)</td>
+                                <td>Roofing bundles, large partition sheathing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <small>&copy; LiteHost Corp.</small>
+        <span data-i18n="brandTag">Build with confidence.</span>
+    </footer>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2 data-i18n="yourCart">Your truck</h2>
+            <button class="cart-close" onclick="toggleCart()" data-i18n-aria="close" aria-label="Close truck">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <span>🛒</span>
+                <span data-i18n="emptyCart">Your truck is empty</span>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="total">Total:</span>
+                <span id="cartTotal">₱0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled onclick="checkout()" data-i18n="checkout">Checkout</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckout()"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-header">
+            <h2 data-i18n="checkoutTitle">Checkout</h2>
+            <button class="cart-close" onclick="closeCheckout()">&times;</button>
+        </div>
+        <div class="checkout-modal-body">
+            <!-- Order Summary -->
+            <div class="checkout-summary" id="checkoutSummary"></div>
+
+            <!-- Payment Method Selection -->
+            <div class="payment-section">
+                <h3 data-i18n="paymentMethod">Payment Method</h3>
+                <div class="payment-options">
+                    <label class="payment-option selected" id="optCard" onclick="selectPayment('card')">
+                        <input type="radio" name="payment" value="card" checked>
+                        <span class="payment-radio"></span>
+                        <span class="payment-icon">💳</span>
+                        <span class="payment-label">
+                            <strong data-i18n="cardPayment">Credit / Debit Card</strong>
+                            <small data-i18n="cardDesc">Visa, Mastercard, etc.</small>
+                        </span>
+                    </label>
+                    <label class="payment-option" id="optGcash" onclick="selectPayment('gcash')">
+                        <input type="radio" name="payment" value="gcash">
+                        <span class="payment-radio"></span>
+                        <span class="payment-icon">📱</span>
+                        <span class="payment-label">
+                            <strong>GCash</strong>
+                            <small data-i18n="gcashDesc">Pay with your GCash wallet</small>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card Form -->
+            <div class="payment-form" id="cardForm">
+                <div class="form-group">
+                    <label data-i18n="cardNumber">Card Number</label>
+                    <input class="form-input" type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" data-i18n-placeholder="cardNumberPlaceholder" oninput="formatCardNumber(this)">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-i18n="expiry">Expiry Date</label>
+                        <input class="form-input" type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" data-i18n-placeholder="expiryPlaceholder" oninput="formatExpiry(this)">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input class="form-input" type="text" id="cardCVV" placeholder="123" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="cardName">Cardholder Name</label>
+                    <input class="form-input" type="text" id="cardName" placeholder="Juan Dela Cruz" data-i18n-placeholder="cardNamePlaceholder">
+                </div>
+            </div>
+
+            <!-- GCash Form -->
+            <div class="payment-form hidden" id="gcashForm">
+                <div class="gcash-send-to">
+                    <span class="gcash-send-label" data-i18n="gcashSendTo">Send payment to</span>
+                    <span class="gcash-send-number"> 09912200239</span>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="gcashNumber">GCash Number</label>
+                    <input class="form-input" type="tel" id="gcashNumber" placeholder="09XX XXX XXXX" maxlength="13" data-i18n-placeholder="gcashNumberPlaceholder" oninput="formatGcash(this)">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="gcashName">Account Name</label>
+                    <input class="form-input" type="text" id="gcashName" placeholder="Juan Dela Cruz" data-i18n-placeholder="gcashNamePlaceholder">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="gcashRef">Reference Number</label>
+                    <input class="form-input" type="text" id="gcashRef" placeholder="#" maxlength="17" data-i18n-placeholder="gcashRefPlaceholder" oninput="this.value=this.value.replace(/[^0-9 ]/g,'')">
+                </div>
+            </div>
+        </div>
+        <div class="checkout-modal-footer">
+            <div class="cart-total">
+                <span data-i18n="total">Total:</span>
+                <span id="checkoutTotal">₱0.00</span>
+            </div>
+            <button class="checkout-btn place-order-btn" id="placeOrderBtn" onclick="placeOrder()" data-i18n="placeOrder">Place Order</button>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const products = [
+            { id: 1,  name: "2×4×8 Pine Stud",        category: "plywood",     price: 85,  icon: "7lumber1.png", desc: "Kiln-dried whitewood stud, ideal for framing." },
+            { id: 2,  name: "Plywood Sheet 4×8",    category: "plywood",     price: 94,  icon: "7lumber2.png", desc: "Sanded plywood sheet for subfloors and sheathing." },
+            { id: 3,  name: "2×6 Pressure Treated", category: "plywood",     price: 200,  icon: "7lumber3.png", desc: "Ground-contact rated plywood for outdoor projects." },
+            { id: 4,  name: "Portland Cement",      category: "cement",      price: 150,  icon: "7cement1.png", desc: "Type I/II general-purpose portland cement." },
+            { id: 5,  name: "Ready-Mix Concrete",   category: "cement",      price: 300,  icon: "7cement2.png", desc: "Just add water – sets in 24 hours." },
+            { id: 6,  name: "Mortar Mix",           category: "cement",      price: 200,  icon: "7cement3.png", desc: "Type S mortar for laying brick and block." },
+            { id: 7,  name: "Wood Screws #8",       category: "fasteners",   price: 50,  icon: "7nails1.png",  desc: "Phillips flat-head wood screws, 2-inch." },
+            { id: 8,  name: "Concrete Nails",       category: "fasteners",   price: 50,  icon: "7nails2.png",  desc: "Bright common nails for framing work." },
+            { id: 9,  name: "Concrete Anchors",     category: "fasteners",   price: 50,  icon: "7nails3.png",  desc: "Wedge anchors for securing to concrete." },
+            { id: 10, name: "PVC Pipe 1″",          category: "plumbing",    price: 35,  icon: "7pipes1.png",  desc: "Schedule 40 PVC pipe for water supply." },
+            { id: 11, name: "Copper Elbow",         category: "plumbing",    price: 45,  icon: "7pipes2.png",  desc: "90-degree copper sweat elbows." },
+            { id: 12, name: "Ball Valve Brass",     category: "plumbing",    price: 24,  icon: "7pipes3.png",  desc: "Full-port brass ball valve, lead-free." },
+            { id: 13, name: "Romex 14/2 Wire",      category: "electrical",  price: 75,  icon: "7wire1.png", desc: "NM-B residential electrical cable." },
+            { id: 14, name: "Outlet Receptacle",     category: "electrical",  price: 30,  icon: "7wire2.png", desc: "15A 125V duplex receptacles, white." },
+            { id: 15, name: "Circuit Breaker 20A",  category: "electrical",  price: 125,  icon: "7wire3.png", desc: "Single-pole plug-in circuit breaker." },
+            { id: 16, name: "Interior Latex Paint", category: "paint",       price: 150,  icon: "7paint1.png",  desc: "Eggshell finish, ultra white, low VOC." },
+            { id: 17, name: "Primer Sealer",         category: "paint",       price: 150,  icon: "7paint2.png",  desc: "Multi-surface bonding primer." },
+            { id: 18, name: "Paint Roller Kit",     category: "paint",       price: 50,  icon: "7paint3.png",  desc: "Roller frame, cover, and tray set." },
+            { id: 19, name: "Claw Hammer",           category: "tools",       price: 67,  icon: "7tool1.png",  desc: "Fiberglass handle, smooth face." },
+            { id: 20, name: "Tape Measure",          category: "tools",       price: 68,  icon: "7tool2.png",  desc: "Auto-lock blade with magnetic tip." },
+            { id: 21, name: "Cordless Drill",       category: "tools",       price: 2500,  icon: "7tool3.png",  desc: "Lithium-ion drill/driver with battery." },
+            { id: 22, name: "Level",                 category: "tools",       price: 69,  icon: "7tool4.png",  desc: "Aluminum box beam level, 3 vials." },
+            { id: 23, name: "Safety Glasses",       category: "tools",       price:  99,  icon: "7tool5.png",  desc: "Impact-resistant polycarbonate lenses." },
+            { id: 24, name: "Utility Knife",        category: "tools",       price: 40,  icon: "7tool6.png",  desc: "Retractable blade with quick-change." },
+        ];
+
+        let cart = [];
+        try {
+            const savedCart = localStorage.getItem('litebuild-cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart).map(item => {
+                    const latest = products.find(p => p.id === item.id);
+                    return latest ? { ...item, icon: latest.icon } : item;
+                });
+            }
+        } catch(e){}
+
+        function tr(key) {
+            return (window.LiteBuildI18n && window.LiteBuildI18n.t) ? window.LiteBuildI18n.t(key) : key;
+        }
+        function productText(id, part) {
+            return (window.LiteBuildI18n && window.LiteBuildI18n.product) ? window.LiteBuildI18n.product(id, part) : (part === 0 ? products.find(p=>p.id===id)?.name : products.find(p=>p.id===id)?.desc);
+        }
+
+        function renderProductIcon(icon, alt = "") {
+            if (!icon) return "";
+            if (typeof icon === "string" && (/\.(png|jpe?g|webp|svg|gif)$/i.test(icon) || icon.includes("/"))) {
+                return `<img src="${icon}" alt="${alt}">`;
+            }
+            return icon;
+        }
+
+        let currentFilter = "all";
+        function renderProducts(filter = currentFilter) {
+            currentFilter = filter;
+            const grid = document.getElementById("productGrid");
+            if (!grid) return;
+            const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-img">${renderProductIcon(product.icon, productText(product.id, 0))}</div>
+                    <div class="product-info">
+                        <div class="product-category">${tr(product.category)}</div>
+                        <div class="product-name">${productText(product.id, 0)}</div>
+                        <div class="product-desc">${productText(product.id, 1)}</div>
+                        <div class="product-bottom">
+                            <span class="product-price">₱${product.price.toFixed(2)}</span>
+                            <button class="add-to-cart" id="addBtn-${product.id}" onclick="addToCart(${product.id})">${tr("addToCart")}</button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function filterProducts(category, btn) {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProducts(category);
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            try { localStorage.setItem('litebuild-cart', JSON.stringify(cart)); } catch(e){}
+
+            const btn = document.getElementById(`addBtn-${productId}`);
+            if (btn) {
+                btn.textContent = tr("added");
+                btn.classList.add("added");
+                setTimeout(() => {
+                    btn.textContent = tr("addToCart");
+                    btn.classList.remove("added");
+                }, 1000);
+            }
+
+            showToast(`${productText(product.id, 0)} ${tr("addedToast")}`);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsEl = document.getElementById("cartItems");
+            const cartCountEl = document.getElementById("cartCount");
+            const cartTotalEl = document.getElementById("cartTotal");
+            const checkoutBtn = document.getElementById("checkoutBtn");
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            if (cartCountEl) cartCountEl.textContent = totalItems;
+            if (cartTotalEl) cartTotalEl.textContent = `₱${totalPrice.toFixed(2)}`;
+            if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+
+            if (!cartItemsEl) return;
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = `
+                    <div class="cart-empty">
+                        <span>🚚</span>
+                        <span>${tr("emptyCart")}</span>
+                    </div>`;
+                return;
+            }
+
+            cartItemsEl.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-icon">${renderProductIcon(item.icon, productText(item.id, 0))}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${productText(item.id, 0)}</div>
+                        <div class="cart-item-price">₱${(item.price * item.qty).toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                        <span class="cart-item-qty">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function changeQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            try { localStorage.setItem('litebuild-cart', JSON.stringify(cart)); } catch(e){}
+            updateCart();
+        }
+
+        function removeFromCart(productId) {
+            const item = cart.find(i => i.id === productId);
+            cart = cart.filter(i => i.id !== productId);
+            try { localStorage.setItem('litebuild-cart', JSON.stringify(cart)); } catch(e){}
+            if (item) showToast(`${productText(item.id, 0)} ${tr("removedToast")}`);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById("cartSidebar").classList.toggle("open");
+            document.getElementById("cartOverlay").classList.toggle("open");
+        }
+
+        let selectedPayment = 'card';
+
+        function checkout() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            // Build order summary
+            const summaryEl = document.getElementById('checkoutSummary');
+            summaryEl.innerHTML = cart.map(item => `
+                <div class="checkout-summary-item">
+                    <div class="checkout-summary-icon">${renderProductIcon(item.icon, productText(item.id, 0))}</div>
+                    <div class="checkout-summary-details">
+                        <span class="checkout-summary-name">${productText(item.id, 0)}</span>
+                        <span class="checkout-summary-qty">×${item.qty}</span>
+                    </div>
+                    <span class="checkout-summary-price">₱${(item.price * item.qty).toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('checkoutTotal').textContent = `₱${totalPrice.toFixed(2)}`;
+
+            // Reset forms
+            selectedPayment = 'card';
+            selectPayment('card');
+            document.querySelectorAll('.checkout-modal .form-input').forEach(i => i.value = '');
+
+            // Close cart sidebar, open checkout modal
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('open');
+            document.getElementById('checkoutOverlay').classList.add('open');
+            document.getElementById('checkoutModal').classList.add('open');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutOverlay').classList.remove('open');
+            document.getElementById('checkoutModal').classList.remove('open');
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.getElementById('optCard').classList.toggle('selected', method === 'card');
+            document.getElementById('optGcash').classList.toggle('selected', method === 'gcash');
+            document.getElementById('optCard').querySelector('input').checked = method === 'card';
+            document.getElementById('optGcash').querySelector('input').checked = method === 'gcash';
+            document.getElementById('cardForm').classList.toggle('hidden', method !== 'card');
+            document.getElementById('gcashForm').classList.toggle('hidden', method !== 'gcash');
+        }
+
+        function formatCardNumber(el) {
+            let v = el.value.replace(/\D/g, '').substring(0, 16);
+            el.value = v.replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function formatExpiry(el) {
+            let v = el.value.replace(/\D/g, '').substring(0, 4);
+            if (v.length >= 3) v = v.substring(0, 2) + '/' + v.substring(2);
+            el.value = v;
+        }
+
+        function formatGcash(el) {
+            let v = el.value.replace(/\D/g, '').substring(0, 11);
+            if (v.length > 4 && v.length <= 7) v = v.substring(0, 4) + ' ' + v.substring(4);
+            else if (v.length > 7) v = v.substring(0, 4) + ' ' + v.substring(4, 7) + ' ' + v.substring(7);
+            el.value = v;
+        }
+
+        function placeOrder() {
+            // Basic validation
+            if (selectedPayment === 'card') {
+                const num = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const exp = document.getElementById('cardExpiry').value;
+                const cvv = document.getElementById('cardCVV').value;
+                const name = document.getElementById('cardName').value.trim();
+                if (num.length < 13 || !exp || cvv.length < 3 || !name) {
+                    showToast(tr('fillCardFields'));
+                    return;
+                }
+            } else {
+                const num = document.getElementById('gcashNumber').value.replace(/\s/g, '');
+                const name = document.getElementById('gcashName').value.trim();
+                const ref = document.getElementById('gcashRef').value.replace(/\s/g, '');
+                if (num.length < 11 || !name || !ref) {
+                    showToast(tr('fillGcashFields'));
+                    return;
+                }
+            }
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const methodLabel = selectedPayment === 'card' ? tr('cardPayment') : 'GCash';
+
+            cart = [];
+            try { localStorage.removeItem('litebuild-cart'); } catch(e){}
+            updateCart();
+            closeCheckout();
+
+            // Redirect to thank you page
+            window.location.href = '2out.html';
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCart();
+        });
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+        });
+        document.addEventListener('litebuild-language-change', () => {
+            renderProducts(currentFilter);
+            updateCart();
+        });
+        (() => {
+            const root = document.documentElement;
+            const button = document.querySelector('.theme-toggle');
+            if (!button) return;
+            const label = button.querySelector('.theme-label');
+            const icon = button.querySelector('.theme-icon');
+            function sync() {
+                const dark = root.classList.contains('dark-theme');
+                if (label) label.textContent = window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'light' : 'dark') : (dark ? 'Light' : 'Dark');
+                if (icon) icon.textContent = dark ? '☀' : '☾';
+                button.setAttribute('aria-pressed', String(dark));
+                button.setAttribute('aria-label', window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'switchLight' : 'switchDark') : (dark ? 'Switch to light mode' : 'Switch to dark mode'));
+            }
+            sync();
+            button.addEventListener('click', () => {
+                root.classList.toggle('dark-theme');
+                try { localStorage.setItem('litebuild-theme', root.classList.contains('dark-theme') ? 'dark' : 'light'); } catch(e){}
+                sync();
+            });
+        })();
+    </script>
+</body>
+</html>

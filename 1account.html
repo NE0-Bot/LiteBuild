@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7f4">
+  <title>Create Account · LiteBuild</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="3style.css">
+  <script>try{if(localStorage.getItem('litebuild-theme')==='dark')document.documentElement.classList.add('dark-theme')}catch(e){}</script>
+  <script src="4translationDictionary.js"></script>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-banner">
+      <img src="banner.png" alt="LiteBuild Banner" class="banner-img">
+    </div>
+    <div class="wrap topbar">
+      <a class="brand" href="0homepage.html">
+        <img src="5logo.png" alt="LiteBuild Logo">
+        <span>
+          <strong>LiteBuild</strong>
+          <small>by LiteHost</small>
+        </span>
+      </a>
+      <div class="page-controls">
+        <select class="language-select" aria-label="Language" data-i18n-aria="languageName">
+          <option value="en">English</option>
+          <option value="fil">Filipino</option>
+        </select>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">☾</span>
+          <span class="theme-label">Dark</span>
+        </button>
+      </div>
+      <nav class="topbar-nav" aria-label="Main Navigation">
+        <ul>
+          <li><a class="nav-link" href="0homepage.html">Home</a></li>
+          <li><a class="nav-link" href="2shop.html"><span data-i18n="exploreShop">Shop</span></a></li>
+          <li><a class="nav-link" href="1index.html"><span data-i18n="signIn">Sign in</span> <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap signin-stage">
+    <div class="signin-container">
+      <div class="signin-intro">
+        <span class="signin-pill" data-i18n="brandTag">Build with confidence</span>
+        <h1 data-i18n="createAccountHeadline">Join the build.</h1>
+        <p data-i18n="createAccountText">Create your LiteBuild account to browse products, track orders, and get started on your next project.</p>
+      </div>
+
+      <div class="signin-card">
+        <h2 data-i18n="createAccountTitle">Create Account</h2>
+        <p class="subtitle" data-i18n="createAccountSubtitle">Fill in your details to get started.</p>
+
+        <form action="2shop.html" method="get" id="create-account-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullname" data-i18n="fullName">Full Name</label>
+              <input class="form-input" type="text" id="fullname" name="fullname" placeholder="Enter your full name" data-i18n-placeholder="fullNamePlaceholder" required>
+            </div>
+            <div class="form-group">
+              <label for="new-username" data-i18n="username">Username</label>
+              <input class="form-input" type="text" id="new-username" name="username" placeholder="Choose a username" data-i18n-placeholder="chooseUsernamePlaceholder" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" data-i18n="emailLabel">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="Enter your email address" data-i18n-placeholder="emailPlaceholder" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-password" data-i18n="password">Password</label>
+              <input class="form-input" type="password" id="new-password" name="password" placeholder="Create a password" data-i18n-placeholder="createPasswordPlaceholder" required minlength="8">
+            </div>
+            <div class="form-group">
+              <label for="confirm-password" data-i18n="confirmPassword">Confirm Password</label>
+              <input class="form-input" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" data-i18n-placeholder="confirmPasswordPlaceholder" required minlength="8">
+            </div>
+          </div>
+
+          <!-- Terms & Conditions -->
+          <div class="terms-section">
+            <details class="terms-details">
+              <summary class="terms-summary">
+                <span data-i18n="viewTerms">View Terms &amp; Conditions</span>
+                <a href="Terms.pdf" target="_blank" class="terms-popout-link" title="Open PDF in new tab" onclick="event.stopPropagation()">↗ Pop out</a>
+              </summary>
+              <div class="terms-content">
+                <object data="Terms.pdf" type="application/pdf" class="terms-pdf-viewer">
+                  <p data-i18n="termsAltText">Your browser does not support embedded PDFs. 
+                    <a href="Terms.pdf" target="_blank" class="text-link" data-i18n="termsDownload">Download Terms &amp; Conditions (PDF)</a>
+                  </p>
+                </object>
+              </div>
+            </details>
+
+            <div class="terms-agree">
+              <input type="checkbox" id="agree-terms" name="agree-terms" required>
+              <label for="agree-terms" data-i18n="agreeTerms">I have read and agree to the <a href="Terms.pdf" target="_blank" class="text-link">Terms &amp; Conditions</a></label>
+            </div>
+          </div>
+
+          <button class="signin-submit" type="submit" data-i18n="createAccountBtn">Create Account</button>
+        </form>
+
+        <div class="signin-card-footer">
+          <span style="color: #7a8894;" data-i18n="alreadyHaveAccount">Already have an account?</span>
+          <a class="text-link" href="1index.html" data-i18n="signInLink">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2025 LiteHost Corp.</span>
+      <span data-i18n="brandTag">Build with confidence.</span>
+    </div>
+  </footer>
+
+  <script>
+    (()=>{
+      // Theme toggle
+      const root = document.documentElement;
+      const button = document.querySelector('.theme-toggle');
+      if (!button) return;
+      const label = button.querySelector('.theme-label');
+      const icon = button.querySelector('.theme-icon');
+      function sync(){
+        const dark = root.classList.contains('dark-theme');
+        if (label) label.textContent = window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'light' : 'dark') : (dark ? 'Light' : 'Dark');
+        if (icon) icon.textContent = dark ? '☀' : '☾';
+        button.setAttribute('aria-pressed', String(dark));
+        button.setAttribute('aria-label', window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'switchLight' : 'switchDark') : (dark ? 'Switch to light mode' : 'Switch to dark mode'));
+      }
+      sync();
+      button.addEventListener('click', ()=>{
+        root.classList.toggle('dark-theme');
+        try { localStorage.setItem('litebuild-theme', root.classList.contains('dark-theme') ? 'dark' : 'light'); } catch(e){}
+        sync();
+      });
+
+      // Password confirmation validation
+      const form = document.getElementById('create-account-form');
+      const pwd = document.getElementById('new-password');
+      const confirmPwd = document.getElementById('confirm-password');
+      
+      form.addEventListener('submit', (e) => {
+        if (pwd.value !== confirmPwd.value) {
+          e.preventDefault();
+          confirmPwd.setCustomValidity('Passwords do not match.');
+          confirmPwd.reportValidity();
+        }
+      });
+
+      confirmPwd.addEventListener('input', () => {
+        confirmPwd.setCustomValidity('');
+      });
+    })();
+  </script>
+</body>
+</html>

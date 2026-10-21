@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - LiteBuild</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="3style.css">
+    <script>try{if(localStorage.getItem('litebuild-theme')==='dark')document.documentElement.classList.add('dark-theme')}catch(e){}</script>
+    <script src="4translationDictionary.js"></script>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header" role="banner">
+        <div class="header-banner">
+            <img src="banner.png" alt="LiteBuild Banner" class="banner-img">
+        </div>
+        <div class="wrap topbar">
+            <a class="brand" href="0homepage.html">
+                <img src="5logo.png" alt="LiteBuild Logo">
+                <span>
+                    <strong>LiteBuild</strong>
+                    <small>by LiteHost</small>
+                </span>
+            </a>
+            <div class="page-controls">
+                <select class="language-select" aria-label="Language" data-i18n-aria="languageName">
+                    <option value="en">English</option>
+                    <option value="fil">Filipino</option>
+                </select>
+                <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <span class="theme-icon" aria-hidden="true">☾</span>
+                    <span class="theme-label">Dark</span>
+                </button>
+            </div>
+            <nav class="topbar-nav" aria-label="Main Navigation">
+                <ul>
+                    <li><a class="nav-link" href="0homepage.html">Home</a></li>
+                    <li><a class="nav-link" href="2shop.html"><span data-i18n="exploreShop">Shop</span></a></li>
+                    <li><a class="nav-link" href="1index.html"><span data-i18n="signIn">Sign in</span> <span aria-hidden="true">↗</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="thankyou-main">
+
+        <!-- Thank You Banner -->
+        <section class="thankyou-hero">
+            <div class="thankyou-checkmark">✓</div>
+            <h1>Thank You for Your Purchase!</h1>
+            <p>Your order has been placed successfully. We're preparing your materials for delivery. You'll receive a confirmation shortly.</p>
+        </section>
+
+        <!-- Truck Video -->
+        <section class="thankyou-video-section">
+            <div class="thankyou-video-wrapper">
+                <video class="thankyou-video" autoplay muted loop playsinline>
+                    <source src="truck.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Back to Home Button -->
+        <section class="thankyou-actions">
+            <a class="btn thankyou-home-btn" href="0homepage.html">
+                ← Back to Home
+            </a>
+            <a class="btn thankyou-shop-btn" href="2shop.html">
+                Continue Shopping →
+            </a>
+        </section>
+
+        <!-- Feedback Form -->
+        <section class="thankyou-feedback">
+            <div class="thankyou-feedback-card">
+                <div class="thankyou-feedback-header">
+                    <span class="thankyou-feedback-icon">💬</span>
+                    <div>
+                        <h2>We'd Love Your Feedback</h2>
+                        <p>Help us improve your shopping experience.</p>
+                    </div>
+                </div>
+
+                <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label for="feedbackName">Name</label>
+                        <input class="form-input" type="text" id="feedbackName" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email</label>
+                        <input class="form-input" type="email" id="feedbackEmail" placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How would you rate your experience?</label>
+                        <div class="star-rating" id="starRating">
+                            <button type="button" class="star-btn" data-value="1" aria-label="1 star">★</button>
+                            <button type="button" class="star-btn" data-value="2" aria-label="2 stars">★</button>
+                            <button type="button" class="star-btn" data-value="3" aria-label="3 stars">★</button>
+                            <button type="button" class="star-btn" data-value="4" aria-label="4 stars">★</button>
+                            <button type="button" class="star-btn" data-value="5" aria-label="5 stars">★</button>
+                        </div>
+                        <input type="hidden" id="ratingValue" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackMessage">Your Feedback</label>
+                        <textarea class="form-input feedback-textarea" id="feedbackMessage" rows="4" placeholder="Tell us what you think..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn feedback-submit-btn">Submit Feedback</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <small>&copy; LiteHost Corp.</small>
+        <span data-i18n="brandTag">Build with confidence.</span>
+    </footer>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        /* Star Rating */
+        let selectedRating = 0;
+        document.querySelectorAll('.star-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedRating = parseInt(btn.dataset.value);
+                document.getElementById('ratingValue').value = selectedRating;
+                document.querySelectorAll('.star-btn').forEach(b => {
+                    b.classList.toggle('active', parseInt(b.dataset.value) <= selectedRating);
+                });
+            });
+            btn.addEventListener('mouseenter', () => {
+                const hoverVal = parseInt(btn.dataset.value);
+                document.querySelectorAll('.star-btn').forEach(b => {
+                    b.classList.toggle('hover', parseInt(b.dataset.value) <= hoverVal);
+                });
+            });
+            btn.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('hover'));
+            });
+        });
+
+        /* Submit Feedback */
+        function submitFeedback(e) {
+            e.preventDefault();
+            if (selectedRating === 0) {
+                showToast('Please select a star rating.');
+                return;
+            }
+            const name = document.getElementById('feedbackName').value.trim();
+            const email = document.getElementById('feedbackEmail').value.trim();
+            const message = document.getElementById('feedbackMessage').value.trim();
+
+            // In a real app this would POST to a server
+            showToast(`Thank you, ${name}! Your feedback has been submitted.`);
+
+            // Reset form
+            document.getElementById('feedbackForm').reset();
+            selectedRating = 0;
+            document.getElementById('ratingValue').value = 0;
+            document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        /* Theme Toggle */
+        (() => {
+            const root = document.documentElement;
+            const button = document.querySelector('.theme-toggle');
+            if (!button) return;
+            const label = button.querySelector('.theme-label');
+            const icon = button.querySelector('.theme-icon');
+            function sync() {
+                const dark = root.classList.contains('dark-theme');
+                if (label) label.textContent = window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'light' : 'dark') : (dark ? 'Light' : 'Dark');
+                if (icon) icon.textContent = dark ? '☀' : '☾';
+                button.setAttribute('aria-pressed', String(dark));
+                button.setAttribute('aria-label', window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'switchLight' : 'switchDark') : (dark ? 'Switch to light mode' : 'Switch to dark mode'));
+            }
+            sync();
+            button.addEventListener('click', () => {
+                root.classList.toggle('dark-theme');
+                try { localStorage.setItem('litebuild-theme', root.classList.contains('dark-theme') ? 'dark' : 'light'); } catch(e){}
+                sync();
+            });
+        })();
+    </script>
+</body>
+</html>

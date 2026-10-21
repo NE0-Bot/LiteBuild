@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f4">
+  <title>LiteBuild</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="3style.css">
+  <script>try{if(localStorage.getItem('litebuild-theme')==='dark')document.documentElement.classList.add('dark-theme')}catch(e){}</script>
+  <script src="4translationDictionary.js"></script>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-banner">
+      <img src="banner.png" alt="LiteBuild Banner" class="banner-img">
+    </div>
+    <div class="wrap topbar">
+      <a class="brand" href="0homepage.html">
+        <img src="5logo.png" alt="LiteBuild Logo">
+        <span>
+          <strong>LiteBuild</strong>
+          <small>by LiteHost</small>
+        </span>
+      </a>
+      <div class="page-controls">
+        <select class="language-select" aria-label="Language" data-i18n-aria="languageName">
+          <option value="en">English</option>
+          <option value="fil">Filipino</option>
+        </select>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">☾</span>
+          <span class="theme-label">Dark</span>
+        </button>
+      </div>
+      <nav class="topbar-nav" aria-label="Main Navigation">
+        <ul>
+          <li><a class="nav-link active" href="0homepage.html">Home</a></li>
+          <li><a class="nav-link" href="1index.html"><span data-i18n="exploreShop">Shop</span></a></li>
+          <li><a class="nav-link" href="1index.html"><span data-i18n="signIn">Sign in</span> <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-photo-marquee" aria-hidden="true">
+        <div class="photo-marquee-track track-forward">
+          <div class="photo-marquee-set">
+            <a class="photo-anchor" title="Explore materials">
+              <img src="unfinished-facade.webp" alt="Building facade under construction" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="concrete-site.webp" alt="Concrete construction site" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="framed-houses.webp" alt="Framed houses" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="drywall-buildout.webp" alt="Drywall buildout" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="commercial-interior.webp" alt="Commercial interior construction" loading="eager" decoding="async">
+            </a>
+          </div>
+          <div class="photo-marquee-set">
+            <a class="photo-anchor" title="Explore materials">
+              <img src="unfinished-facade.webp" alt="Building facade under construction" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="concrete-site.webp" alt="Concrete construction site" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="framed-houses.webp" alt="Framed houses" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="drywall-buildout.webp" alt="Drywall buildout" loading="eager" decoding="async">
+            </a>
+            <a class="photo-anchor" title="Explore materials">
+              <img src="commercial-interior.webp" alt="Commercial interior construction" loading="eager" decoding="async">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <span class="pill"><span class="dot"></span> <span data-i18n="heroPill">Your project starts here</span></span>
+        <h1 data-i18n="heroHeadline">Make room for what’s next.</h1>
+        <p data-i18n="heroText">From the first sketch to the finishing touches, find the dependable materials and tools that help bring your ideas to life.</p>
+        <div class="actions">
+          <a class="btn" href="1index.html" data-i18n="noAccount"> Sign in <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="1index.html" data-i18n="haveAccount">I have an account</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="art-tag tag-one" data-i18n="tagOne">Thoughtful essentials</span>
+        <a class="hero-logo-frame" href="2shop.html" title="LiteBuild Shop">
+          <div class="orb"></div>
+          <img class="hero-logo" src="5logo.png" alt="LiteBuild Logo">
+        </a>
+        <span class="art-tag tag-two" data-i18n="tagTwo">Made for building  </span>
+      </div>
+    </section>
+
+    <section class="features" aria-label="Why shop LiteBuild" data-i18n-aria="whyShop">
+      <article class="feature">
+        <span class="feature-icon">✳</span>
+        <div>
+          <h3 data-i18n="featureOne">Reliable materials</h3>
+          <p data-i18n="featureOneText">Everyday essentials for projects big and small.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <span class="feature-icon">↗</span>
+        <div>
+          <h3 data-i18n="featureTwo">Easy to explore</h3>
+          <p data-i18n="featureTwoText">Find the right category without the extra hassle.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <span class="feature-icon">⌂</span>
+        <div>
+          <h3 data-i18n="featureThree">Here for your next build</h3>
+          <p data-i18n="featureThreeText">A practical place to get your plans moving.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span>© 2025 LiteHost Corp.</span>
+      <span data-i18n="brandTag">Build with confidence.</span>
+    </div>
+  </footer>
+
+  <script>
+    (()=>{
+      const root = document.documentElement;
+      const button = document.querySelector('.theme-toggle');
+      if (!button) return;
+      const label = button.querySelector('.theme-label');
+      const icon = button.querySelector('.theme-icon');
+      function sync(){
+        const dark = root.classList.contains('dark-theme');
+        if (label) label.textContent = window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'light' : 'dark') : (dark ? 'Light' : 'Dark');
+        if (icon) icon.textContent = dark ? '☀' : '☾';
+        button.setAttribute('aria-pressed', String(dark));
+        button.setAttribute('aria-label', window.LiteBuildI18n ? window.LiteBuildI18n.t(dark ? 'switchLight' : 'switchDark') : (dark ? 'Switch to light mode' : 'Switch to dark mode'));
+      }
+      sync();
+      button.addEventListener('click', ()=>{
+        root.classList.toggle('dark-theme');
+        try { localStorage.setItem('litebuild-theme', root.classList.contains('dark-theme') ? 'dark' : 'light'); } catch(e){}
+        sync();
+      });
+    })();
+  </script>
+</body>
+</html>
